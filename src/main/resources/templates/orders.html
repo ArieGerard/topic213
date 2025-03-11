@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">My Orders</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+    <div class="container">
+        <h1 th:text="${title}">My Orders</h1>
+        <p>Test message: This is a test message to verify the orders page.</p>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Order Number</th>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:if="${orders.empty}">
+                    <td colspan="4">No Orders Available</td>
+                </tr>
+                <tr th:each="order : ${orders}">
+                    <td th:text="${order.orderNo}">Order Number</td>
+                    <td th:text="${order.productName}">Product Name</td>
+                    <td th:text="${order.price}">Price</td>
+                    <td th:text="${order.quantity}">Quantity</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
