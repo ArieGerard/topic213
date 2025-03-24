@@ -1,7 +1,7 @@
 package com.gcu.model;
 
 public class OrderModel {
-    private Long id;
+    private String id;
     private String orderNo;
     private String productName;
     private float price;
@@ -10,7 +10,7 @@ public class OrderModel {
     // Constructors, getters, and setters
     public OrderModel(int i, String string, String string2, double d, int j) {}
 
-    public OrderModel(Long id, String orderNo, String productName, float price, int quantity) {
+    public OrderModel(String id, String orderNo, String productName, float price, int quantity) {
         this.id = id;
         this.orderNo = orderNo;
         this.productName = productName;
@@ -18,11 +18,11 @@ public class OrderModel {
         this.quantity = quantity;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

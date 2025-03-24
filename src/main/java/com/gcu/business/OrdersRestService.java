@@ -4,8 +4,11 @@ import com.gcu.model.OrderList;
 import com.gcu.model.OrderModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,5 +41,18 @@ public class OrdersRestService {
         OrderList list = new OrderList();
         list.setOrders(orders);
         return list;
+    }
+
+    @GetMapping("/getorder/{id}")
+    public ResponseEntity<OrderModel> getOrder(@PathVariable("id") String id) {
+        try {
+            OrderModel order = ordersBusinessService.getOrderById(id);
+            if (order == null) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(order, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

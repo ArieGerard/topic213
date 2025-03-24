@@ -1,45 +1,33 @@
 package com.gcu.data;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.support.rowset.SqlRowSet;
-import org.springframework.stereotype.Service;
+import com.gcu.data.entity.OrderEntity;
+import com.gcu.data.repository.OrdersRepository;
 import com.gcu.model.OrderModel;
-import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class OrdersDataService implements DataAccessInterface<OrderModel> {
+public class OrdersDataService implements DataAccessInterface<OrderEntity> {
 
     @Autowired
-    private DataSource dataSource;
+    private OrdersRepository ordersRepository;
 
-    @Autowired
-    private JdbcTemplate jdbcTemplateObject;
-
-    @Autowired
-    public OrdersDataService(DataSource dataSource) {
-        this.dataSource = dataSource;
-        this.jdbcTemplateObject = new JdbcTemplate(dataSource);
+    // Non-default constructor for constructor injection
+    public OrdersDataService(OrdersRepository ordersRepository) {
+        this.ordersRepository = ordersRepository;
     }
 
     @Override
-    public List<OrderModel> findAll() {
-        String sql = "SELECT * FROM orders";
-        List<OrderModel> orders = new ArrayList<>();
+    public List<OrderEntity> findAll() {
+        List<OrderEntity> orders = new ArrayList<>();
         try {
-            SqlRowSet srs = jdbcTemplateObject.queryForRowSet(sql);
-            while (srs.next()) {
-                OrderModel order = new OrderModel(
-                    srs.getInt("id"),
-                    srs.getString("order_no"),
-                    srs.getString("product_name"),
-                    srs.getDouble("price"),
-                    srs.getInt("quantity")
-                );
-                orders.add(order);
-            }
+            Iterable<OrderEntity> orderEntities = ordersRepository.findAll();
+            orderEntities.forEach(orders::add);
+            System.out.println("Orders found: " + orders.size());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -47,17 +35,16 @@ public class OrdersDataService implements DataAccessInterface<OrderModel> {
     }
 
     @Override
-    public OrderModel findById(int id) {
-        // For now, return null
-        return null;
+    public OrderEntity findById(String id) {
+        Optional<OrderEntity> entity = ordersRepository.findById(id);
+        return entity.orElse(null);
     }
 
     @Override
-    public boolean create(OrderModel order) {
-        String sql = "INSERT INTO orders (order_no, product_name, price, quantity) VALUES (?, ?, ?, ?)";
+    public boolean create(OrderEntity order) {
         try {
-            int rows = jdbcTemplateObject.update(sql, order.getOrderNo(), order.getProductName(), order.getPrice(), order.getQuantity());
-            return rows == 1;
+            ordersRepository.save(order);
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -65,14 +52,24 @@ public class OrdersDataService implements DataAccessInterface<OrderModel> {
     }
 
     @Override
-    public boolean update(OrderModel order) {
-        // For now, return true
-        return true;
+    public boolean update(OrderEntity order) {
+        try {
+            ordersRepository.save(order);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
-    public boolean delete(int id) {
-        // For now, return true
-        return true;
+    public boolean delete(String id) {
+        try {
+            ordersRepository.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

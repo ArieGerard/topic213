@@ -1,31 +1,22 @@
 package com.gcu.data.entity;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
-@Entity
-@Table(name = "ORDERS")
+@Document(collection = "orders")
 public class OrderEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
-    @Column(name = "ORDER_NO")
+    @Indexed(unique = true)
     private String orderNo;
 
-    @Column(name = "PRODUCT_NAME")
+    @Indexed(unique = true)
     private String productName;
 
-    @Column(name = "PRICE")
     private float price;
-
-    @Column(name = "QUANTITY")
     private int quantity;
 
     // Default constructor
@@ -33,7 +24,7 @@ public class OrderEntity {
     }
 
     // Non-default constructor
-    public OrderEntity(Long id, String orderNo, String productName, float price, int quantity) {
+    public OrderEntity(String id, String orderNo, String productName, float price, int quantity) {
         this.id = id;
         this.orderNo = orderNo;
         this.productName = productName;
@@ -42,11 +33,11 @@ public class OrderEntity {
     }
 
     // Getters and setters
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

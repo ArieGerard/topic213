@@ -1,38 +1,88 @@
-# Project Screenshots and Research Questions
+## Arie Gerard Activity 5
+### Proffesor Etsy
+----------
+### 03/23/2025
 
-## Section 1: Creating Data Services Using Spring JDBC
+## Part 1: Creating Data Services Using Spring Data MongoDB
 
-### Screenshot 
-![alt text](<../images/Screenshot 2025-03-07 113448.jpg>)
-**Description**: This screenshot shwos the orders page in the correct format without shwoing the orders from the database
+#### Screenshot 1: Screenshot of the Orders Page Dispalying from the mongoDB database. 
 
-## Section 2: Creating Data Services Using Spring Data JDBC.
+![alt text](../images/OdersPage.png)
+
+#### Screenshot 2: Screenshot of the JSON and XML Rest API responses. 
+![alt text](../images/XmlResponse.png)
 
 
-### Screenshot
-![alt text](<../images/Screenshot 2025-03-09 185851.jpg>)
-**Description**: This screenshot shows the orders page populated from the database using Spring Data JDBC
+- Description: Shows the JSON response for the Orders from the MongoDB database
 
-## Section 3: Creating Data Services Using Spring Data JDBC Native Queries
 
-### Screenshot
-![alt text](<../images/Screenshot 2025-03-11 005816.jpg>)
-**Description**: This screenshot shows the orders page populated from the database using the JDBC Native Queries
+![alt text](../images/1XmlResponse.png)
 
-## Research Questions
+- Description: Shows the XML response for the Orders from the MongoDB database
 
-### Research Question 1
-**Question**: How does Spring Data JDBC differ from standard Java JDBC programming?
-**Answer**: Spring Data JDBC differs from standard Java JDBC programming in several ways:
 
-Simplified Configuration: Spring Data JDBC provides a simplified configuration process, reducing the amount of boilerplate code required to set up database connections and manage transactions.
-Repository Abstraction: Spring Data JDBC introduces the concept of repositories, which provide a higher-level abstraction for data access operations. This allows developers to define repository interfaces and let Spring Data JDBC generate the implementation automatically.
-Declarative Queries: Spring Data JDBC supports declarative queries using the @Query annotation, allowing developers to define custom SQL queries directly in the repository interface.
-Entity Mapping: Spring Data JDBC provides built-in support for mapping Java objects to database tables, similar to JPA, but with a focus on simplicity and performance.
-### Research Question 2
-**Question**: How does Spring Data JDBC support transaction management and the ACID principle?
-**Answer**: Spring Data JDBC supports transaction management and the ACID (Atomicity, Consistency, Isolation, Durability) principle through its integration with Spring's transaction management system. Key features include:
 
-Declarative Transaction Management: Spring Data JDBC allows developers to use annotations like @Transactional to declaratively manage transactions, ensuring that database operations are executed within a transactional context.
-Atomicity: Spring Data JDBC ensures that all operations within a transaction are treated as a single unit of work. If any operation fails, the entire transaction is rolled back, maintaining atomicity.
-Consistency: Spring Data JDBC enforces data consistency by ensuring that all operations within a transaction adhere to the defined constraints and rules. If any operation violates these constraints, the transaction is rolled back.
+----
+---
+## Part 2: Adding New Queries in the MongoDB Repsoitory 
+
+#### Screenshot 1: Screenshot of the JSON REST API response with a known ID 
+
+![alt text](../images/XmlResponse.png)
+- Description Shows teh Response page outprinting the XML response for a order with the correct ID 
+----
+
+#### Screenshot 2: Screenshot of the JSON REST API response with an invalid ID 
+
+![alt text](../images/Error.png)
+- Description: Shows a HTTPS error page when an invalid ID is inserted
+
+
+### Reaserch Questions:
+
+## Question 1:  Compare and contrast the design of schema in a relational database and a nonrelational database. How do they differ and what impact(s) does migrating from a relational database to a nonrelational database have on your application design?
+
+- Structure: Relational databases use a structured Schema while nonrelational databases uses a more flexible schema. 
+
+- Normalization: In a relational database normalization is used to reduce redunancy and ensure the data is intact while in a noSql database data is often denormalized to improve read preformance. 
+
+### Impact of Migrating from Relational to Nonrelational Database:
+
+- Data Modeling: The data Modeling approach changes from a structured normalized schema to a more flexible denormalized schema. 
+
+- Querying: The way that the data is queried changes as they use different languages and APIs. 
+
+
+
+
+
+
+## Question 2:Compare and contrast the features of a relational database and a nonrelational database. Provide three advantages and rationale for why you would select a relational database. Provide three advantages and rationale for why you would select a nonrelational database.
+
+
+- Relational Database Features:
+
+- ACID Transactions: Ensures data integrity and reliability through Atomicity, Consistency, Isolation, and Durability.
+
+- Structured Query Language (SQL): Provides a powerful and standardized way to query and manipulate data.
+Data Integrity: Enforces data integrity through constraints, foreign keys, and normalization.
+- Advantages of Relational Database:
+- Data Integrity: Ensures data accuracy and consistency, making it suitable for applications where data integrity is critical.
+Rationale: Ideal for financial systems where data accuracy is paramount.
+Complex Queries: Allows for complex queries, joins, and aggregations, facilitating data analysis and reporting.
+Rationale: Beneficial for business intelligence tools that require complex data analysis.
+
+- Nonrelational Database Features:
+- Schema Flexibility: Allows for dynamic changes to the data structure without requiring a predefined schema.
+Horizontal Scalability: Designed to scale horizontally, distributing data across multiple servers.
+- Variety of Data Models: Supports various data models, including document, key-value, wide-column, and graph.
+- Advantages of Nonrelational Database:
+- Scalability: Designed to handle large volumes of data and high traffic loads by scaling horizontally.
+- Rationale: Suitable for applications like social media platforms that require high scalability.
+- Flexibility: Offers flexible schemas, allowing for rapid changes to the data structure.
+- Rationale: Ideal for content management systems with evolving data requirements.
+Performance: Provides high performance for specific use cases, such as handling large volumes of unstructured data or high read/write throughput.
+- Rationale: Beneficial for real-time analytics or caching systems that require fast read/write operations.
+
+
+
