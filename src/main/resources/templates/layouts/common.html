@@ -31,7 +31,12 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="/">Start Page</a></li>
-                        <li><a href="/login">Login</a></li> <!-- Added Login link -->
+                        <!-- Log Out Button -->
+                        <li>
+                            <form th:action="@{/logout}" method="post" style="display: inline;">
+                                <button type="submit" class="btn btn-link" style="text-decoration: none; color: inherit;">Log Out</button>
+                            </form>
+                        </li>
                     </ul>
                 </div>
             </nav>

@@ -106,7 +106,22 @@
             <version>1.0.2</version>
             <scope>provided</scope>
         </dependency>
-    </dependencies>
+
+     <dependency>
+    <groupId>org.thymeleaf.extras</groupId>
+    <artifactId>thymeleaf-extras-springsecurity6</artifactId>
+</dependency>
+
+
+
+        <!-- Spring Security Starter -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        
+    
+    </dependencies>        
     <build>
         <plugins>
             <plugin>
